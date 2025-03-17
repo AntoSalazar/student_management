@@ -99,6 +99,3 @@ View all students with their subjects and grades.
 
 This application intentionally doesn't use a database for storing student information. All data is stored in the Django session and will be lost when the session expires. This design aligns with the functional programming principles of the original implementation.
 
-## Original Implementation
-
-This Django application is based on a console-based implementation using functional programming principles. The core logic has been preserved while adapting it to work within a web framework.
