@@ -29,7 +29,7 @@ The application follows a functional programming paradigm within the Django fram
 
 1. Clone this repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/AntoSalazar/student_management.git
    cd student_management
    ```
 
