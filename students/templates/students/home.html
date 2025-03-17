@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, button {
+            margin-bottom: 10px;
+            padding: 8px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px 15px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .messages {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .success {
+            background-color: #dff0d8;
+            color: #3c763d;
+            border: 1px solid #d6e9c6;
+        }
+        .error {
+            background-color: #f2dede;
+            color: #a94442;
+            border: 1px solid #ebccd1;
+        }
+        .info {
+            background-color: #d9edf7;
+            color: #31708f;
+            border: 1px solid #bce8f1;
+        }
+        pre {
+            background-color: #f8f8f8;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            overflow: auto;
+            white-space: pre-wrap;
+        }
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .flex-item {
+            flex: 1;
+            min-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Student Management System</h1>
+    
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="{% if message.tags %}{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    <div class="flex-container">
+        <div class="flex-item">
+            <div class="section">
+                <h2>Add a new student</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="add_student">
+                    
+                    <label for="name">Student name:</label>
+                    <input type="text" id="name" name="name" required>
+                    
+                    <label for="subjects">Subjects and grades:</label>
+                    <input type="text" id="subjects" name="subjects" placeholder="math:85, history:90" required>
+                    
+                    <button type="submit">Add student</button>
+                </form>
+            </div>
+            
+            <div class="section">
+                <h2>Add a new subject</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="add_subject">
+                    
+                    <label for="name_subject">Student name:</label>
+                    <input type="text" id="name_subject" name="name" required>
+                    
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" name="subject" required>
+                    
+                    <label for="grade">Grade:</label>
+                    <input type="number" id="grade" name="grade" required>
+                    
+                    <button type="submit">Add subject</button>
+                </form>
+            </div>
+            
+            <div class="section">
+                <h2>Update grade</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="update_grade">
+                    
+                    <label for="name_upd">Student name:</label>
+                    <input type="text" id="name_upd" name="name" required>
+                    
+                    <label for="subject_upd">Subject:</label>
+                    <input type="text" id="subject_upd" name="subject" required>
+                    
+                    <label for="grade_upd">New grade:</label>
+                    <input type="number" id="grade_upd" name="grade" required>
+                    
+                    <button type="submit">Update grade</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="flex-item">
+            <div class="section">
+                <h2>Remove student</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="remove_student">
+                    
+                    <label for="name_del">Student name:</label>
+                    <input type="text" id="name_del" name="name" required>
+                    
+                    <button type="submit">Remove student</button>
+                </form>
+            </div>
+            
+            <div class="section">
+                <h2>Calculate average</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="calculate_average">
+                    
+                    <label for="name_avg">Student name:</label>
+                    <input type="text" id="name_avg" name="name" required>
+                    
+                    <button type="submit">Calculate average</button>
+                </form>
+            </div>
+            
+            <div class="section">
+                <h2>Student list</h2>
+                <pre>{{ students_formatted }}</pre>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
